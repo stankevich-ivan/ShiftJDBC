@@ -1,0 +1,23 @@
+version: '3.9'
+
+name: shift
+services:
+  postgres:
+    container_name: shift-pg-db
+    image: postgres:12.9-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: shift
+      POSTGRES_USER: shift
+      POSTGRES_DB: shift
+    volumes:
+      - pg-db-shift-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - shift-local
+
+volumes:
+  pg-db-shift-data:
+networks:
+  shift-local:
